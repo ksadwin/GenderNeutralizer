@@ -8,19 +8,28 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="icon" type="image/jpg" href="iconn.jpg">
     <script src="jquery-2.1.3.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
 
 </head>
     <body>
-        <span id="put"></span>
+        <script>
+$(document).ready$('#submit').click(function(){
+      
+    $('body').css("background-color","blue");
+});
+
+function press(){
+  
+$('body').css("background-color","blue");
+   
+}
+        </script>
         <div class="content" id="introPage">
             <h2>Gender Neutralizer</h2>
             <h2><small>This app aims to raise awareness of gender bias in online communications.<br>
                 Pick a set of pronouns and see what happens when you read an article!</small></h2>
-            <form >
+            <form id="choosePls">
                 <input type="radio" name="pronoun" value="they">&nbsp;They/Their<br><input type="radio" name="pronoun" value="he">&nbsp;He/His<br><input type="radio" name="pronoun" value="she">&nbsp;She/Hers<br><br>
-                <button type="submit" id="submit" onclick="press()">Neutralize</button>
-            
+                <button id="submit" type="button" onclick="press()">Neutralize</button>
             </form>
         
         </div>
