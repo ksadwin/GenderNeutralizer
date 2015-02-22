@@ -1,5 +1,4 @@
-Mgender
-actor:entertainer
+﻿actor:entertainer
 alderman:council person
 alumnus:alums
 anchorman:anchor-person
