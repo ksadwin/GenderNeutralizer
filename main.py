@@ -5,6 +5,7 @@ import re
 from nltk.tokenize import word_tokenize
 from nltk.parse.stanford import StanfordParser
 import nltk.tree
+import pickle
 #configure these directories to your computer
 """
 download stanford jars at:
@@ -18,7 +19,7 @@ os.environ['STANFORD_MODELS'] = "stanford-parser-full-2015-01-30/stanford-parser
 #from google import search
 
 
-#fetch web page, return plain text
+#fetch web page, return tuple of title, plain text
 def fetch(url):
     try:
         #requests url using faked firefox header
@@ -28,17 +29,19 @@ def fetch(url):
         htmlstring = firefox.read().decode("utf-8", errors="ignore")
         #takes the messy string and sticks it in a Beautiful Soup object
         soupy = BeautifulSoup(htmlstring)
-        #sticks the header of the url into a variable so we can smash it
-        self.header = str(firefox.info())
+        
 
         #remove excess tags
-        [x.extract() for x in soup.findAll('script', 'iframe', 'style', 'link')]
+        [x.extract() for x in soupy.findAll('script', 'iframe', 'style', 'link')]
+        if (soupy.title != None):
+            title = soupy.title.string.strip()
+        text = soupy.get_text().strip()
 
-        return htmlstring
+        return [title, text]
     
     except Exception:
         return None
-
+"""
 #thank you stackoverflow user James Brady
 def flatten(nestedList):
     result = []
@@ -50,34 +53,43 @@ def flatten(nestedList):
         else:
             result.append(l)
     return result
-
+"""
 # parses and replaces terms according to !dictionary chosen
-def stanfordParse(text):
-    #StanfordParser takes params: path to main jar, path to models jar
-    sp=StanfordParser(model_path="edu/stanford/nlp/models/lexparser/englishPCFG.ser.gz")
-    #build terrible tree list
-    t = sp.raw_parse(text)    
-    l = flatten(t)
-    print(l)
-
-#tokenize
-def tokenize(text):
-    tokens = word_tokenize(text)
-    return tokens
-
-#parse and replace with dictionary of choice, return as string edited
-#currently basic, only identifies whole words
-def parse(tokens, dic):
+def parse(text, dic, gendic):
+    #tokenize page (list of individual words)
+    tokens = nltk.word_tokenize(text)
+    #add tags (list of tuple (tag, word) pair)
+    body = nltk.pos_tag(tokens)
+    #accumulate edited text
     edited = ""
-    for token in tokens:
-        if token in dic.keys():
-            token = dic[token]
-        edited += token
+    for word in body:
+        if word[1] == "PRP" or word[1] == "PRP$":
+            if word in dic.keys():
+                edited += dic[word[0]]
+        elif word[0] in gendic.keys():
+            edited += gendic[word[0]]
+        else:
+            edited += word[0]
     return edited
-
+                
+"""
 def getSearchResults(query):
     search(query)
+"""
 
-#CHOOSE ARTICLES AND DICTIONARIES????
 
-stanfordParse("what am I doing? what is this place?")
+def main():
+    gendic = pickle.load(open("misc.p", "rb"))
+    url = input("URL: ")
+    print("1. They\n2. She\n3. He")
+    r = input("Which?: ")
+    if r == "3":
+        dic = pickle.load(open("toHe.p", "rb"))
+    elif r == "2":
+        dic = pickle.load(open("toShe.p", "rb"))
+    else:
+        dic = pickle.load(open("toThey.p", "rb"))
+    print(gendic)
+    print(dic)
+
+main()

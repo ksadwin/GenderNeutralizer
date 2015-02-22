@@ -6,7 +6,7 @@ def addToDict(dic, filename):
     for line in f.readlines():
         line = line.split(":")
         if len(line) == 2:
-            dic[line[0]] = line[1]
+            dic[line[0]] = line[1].replace("\n", "")
     f.close()
     
     
@@ -19,9 +19,9 @@ def main():
     pickle.dump(miscTerms, open("misc.p", "wb"))
     
     #order: subjective, objective, possessive, possessive noun. PRP($) is for Stanford grammar
-    she = [("PRP", "she"), ("PRP", "her"), ("PRP$", "her"), ("PRP", "hers")]
-    he = [("PRP", "he"), ("PRP", "him"), ("PRP$", "his"), ("PRP", "his")]
-    they = [("PRP", "they"), ("PRP", "them"), ("PRP$", "their"), ("PRP", "their")]
+    she = ["she", "her", "her", "hers"]
+    he = ["he", "him", "his", "his"]
+    they = ["they", "them", "their", "their"]
 
     #change any pronoun to they
     toThey = {}
@@ -37,6 +37,11 @@ def main():
     pickle.dump(toThey, open("toThey.p", "wb"))
     pickle.dump(toShe, open("toShe.p", "wb"))
     pickle.dump(toHe, open("toHe.p", "wb"))
+
+    print(toThey)
+    print(toHe)
+    print(toShe)
+    print(miscTerms)
     
     
     
