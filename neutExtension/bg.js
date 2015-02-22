@@ -14,5 +14,6 @@ var contents = $('body').html();
 
 for (key in misc)
 {
-    contents = contents.replace(key, misc[key]);
+    var r = new RegExp(key, "ig")
+    contents = contents.replace(r, misc[key]);
 }
