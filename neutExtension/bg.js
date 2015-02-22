@@ -12,7 +12,7 @@ var misc = {'motherhood': 'parenthood', 'crewmen': 'crew', 'postmistress': 'post
 
 var contents = $('body').html();
 
-for (key in toThey)
+for (key in misc)
 {
-    contents = contents.replace(key, toThey[key]);
+    contents = contents.replace(key, misc[key]);
 }
