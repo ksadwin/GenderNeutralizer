@@ -44,3 +44,6 @@ Temporary Items
 
 # ignore stanford parser
 stanford-parser-full-2015-01-30
+
+# include pickles
+!*.p
