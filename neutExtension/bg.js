@@ -1,8 +1,17 @@
-﻿ $("body").append('Test');
+ $("body").append('Test');
 function press(){
                 alert("You have chosen" + $("input[name=pronoun]:checked").val());
                 $('body').append($("input[name=pronoun]:checked").val());
             }
+var pro = $("input[name=pronoun]:checked").val();
+
+if (pro == "she"){
+    //some function thing
+} else if (pro == "he"){
+    //some function thing
+} else {
+    //function thing, so 'they' is the else'
+}
 
 
 var toThey = {'hers': 'their', 'she': 'they', 'her': 'their', 'him': 'them', 'his': 'their', 'he': 'they'}
