@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Gender Neutralizer",
-  "version": "0.1",
+  "version": "0.2",
   "description": "Alters gender pronouns on websites.",
   "icons": { "GN": "iconn.png" },
 
@@ -9,7 +9,7 @@
   "browser_action": {
     "default_title": "",
     "default_icon": "iconn.png",
-    "default_popup": "gennewt.html"
+    "default_popup": "beta.html"
   },
     
     "content_scripts": [ {
