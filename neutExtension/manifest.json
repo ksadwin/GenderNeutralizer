@@ -11,8 +11,13 @@
     "default_popup": "gennewt.html"
   },
     
-    "content_scripts": [ {
+   
+"content_scripts": [ {
     "js": [ "jquery-2.1.3.js"],
     "matches": [ "http://*/*", "https://*/*"]
-  }]
+  }],
+"background": {
+    "scripts": ["f.js", "m.js", "t.js", "jquery-2.1.3.js"],
+    "persistent": false
+  }
 }
