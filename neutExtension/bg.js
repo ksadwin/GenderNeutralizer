@@ -12,16 +12,20 @@ function neutralize(){
     
     //calls a different .js file for each pronoun choice
     //the evaluation is done on a page-by-page level, not directly in this file for the extension
-    if (pro == 'f'){ 
-        
-        chrome.tabs.executeScript( { file: 'f.js'}); 
-    } if (pro == 'm'){ 
-        
-        chrome.tabs.executeScript( { file: 'm.js' }); 
-    } if (pro == 't') { 
-        
-        chrome.tabs.executeScript( { file: 't.js' }); 
-    }     
+    if (pro == "m"){ 
+        console.log("m chosen");
+        chrome.tabs.executeScript( { file: 'm.js'}); 
+    } else{
+        if (pro == "f"){ 
+            console.log("f chosen");
+            chrome.tabs.executeScript( { file: 'f.js' }); 
+        } else{ 
+            if (pro == "t") { 
+                console.log("t chosen");
+                chrome.tabs.executeScript( { file: 't.js' }); 
+            }     
+        }
+    }
     
     
 };
